@@ -18,23 +18,24 @@ StandardError=inherit
 # Depending on specificities of your service/app, you may need to tweak these
 # .. but this should be a good baseline
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
-NoNewPrivileges=yes
-PrivateTmp=yes
-PrivateDevices=yes
-RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
-RestrictNamespaces=yes
-RestrictRealtime=yes
-DevicePolicy=closed
-ProtectClock=yes
-ProtectHostname=yes
-ProtectProc=invisible
-ProtectSystem=full
-ProtectControlGroups=yes
-ProtectKernelModules=yes
-ProtectKernelTunables=yes
-LockPersonality=yes
-SystemCallArchitectures=native
-SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation
+# TODO: Try to reenable all that stuff ? postdrop fails because of setgid…
+# NoNewPrivileges=yes
+# PrivateTmp=yes
+# PrivateDevices=yes
+# RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+# RestrictNamespaces=yes
+# RestrictRealtime=yes
+# DevicePolicy=closed
+# ProtectClock=yes
+# ProtectHostname=yes
+# ProtectProc=invisible
+# ProtectSystem=full
+# ProtectControlGroups=yes
+# ProtectKernelModules=yes
+# ProtectKernelTunables=yes
+# LockPersonality=yes
+# SystemCallArchitectures=native
+# SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation
 # @privileged # (not sure why this need to be removed...)
 
 # Denying access to capabilities that should not be relevant for webapps
