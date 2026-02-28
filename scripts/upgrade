@@ -47,6 +47,9 @@ chmod g+s "$install_dir/appstore/assets"
 
 chown -R "$app:www-data" "$install_dir"
 
+mkdir -p "$data_dir/appstore_data"
+chown "$app:$app" "$data_dir/appstore_data"
+
 #=================================================
 # INSTALL APP
 #=================================================
