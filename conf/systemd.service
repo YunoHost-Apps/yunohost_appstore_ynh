@@ -9,7 +9,7 @@ Group=__APP__
 
 PIDFile=/run/gunicorn/__APP__-pid
 WorkingDirectory=__INSTALL_DIR__/appstore
-ExecStart=__INSTALL_DIR__/appstore/venv/bin/gunicorn -c __INSTALL_DIR__/appstore/gunicorn.py app:app
+ExecStart=__INSTALL_DIR__/appstore/venv/bin/gunicorn -c __INSTALL_DIR__/appstore/gunicorn.py appstore.app:app
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 StandardOutput=append:/var/log/__APP__/__APP__.log
