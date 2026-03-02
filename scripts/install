@@ -22,10 +22,6 @@ chmod +x "$install_dir/update_catalog.sh"
 ynh_config_add --template="update_catalog_notify.sh" --destination="$install_dir/update_catalog_notify.sh"
 chmod +x "$install_dir/update_catalog_notify.sh"
 
-# Fixture until we manage it properly
-ln -s "$install_dir/apps" "$install_dir/appstore/.cache/apps"
-ln -s "$install_dir/apps_cache" "$install_dir/appstore/.apps_cache"
-
 # That way, we keep the www-data group when creating files
 chmod g+s "$install_dir/appstore/assets"
 

@@ -44,7 +44,7 @@ update_git_and_venv() {
     }
     popd > /dev/null
 
-    pushd "apps" > /dev/null
+    pushd "__DATA_DIR__/appstore_data/apps" > /dev/null
     {
         git_pull "[appstore/apps] Couldn't pull, maybe local changes are present?"
     }
@@ -73,9 +73,15 @@ main() {
     date
     update_git_and_venv
 
-    apps_tools/venv/bin/python3 apps_tools/app_caches.py -l apps/ -c apps_cache/ -d -j20
+    apps_tools/venv/bin/python3 apps_tools/app_caches.py \
+        -l "__DATA_DIR__/appstore_data/apps" \
+        -c "__DATA_DIR__/appstore_data/apps_cache" \
+        -d -j20
 
-    apps_tools/venv/bin/python3 apps_tools/list_builder.py -l apps -c apps_cache catalog/default
+    apps_tools/venv/bin/python3 apps_tools/list_builder.py \
+        -l "__DATA_DIR__/appstore_data/apps" \
+        -c "__DATA_DIR__/appstore_data/apps_cache" \
+        catalog/default
 
     pushd "appstore"
         # curl https://__DOMAIN__/default/v3/apps.json -so .cache/apps.json

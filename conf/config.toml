@@ -10,5 +10,4 @@ CALLBACK_URL_AFTER_LOGIN_ON_DISCOURSE = "http://__DOMAIN____PATH__/sso_login_cal
 GITHUB_LOGIN = "yunohost-bot"
 GITHUB_EMAIL = "yunohost [at] yunohost.org" # Replace the [at] by actual @
 GITHUB_TOKEN = "superSecretToken"
-APPS_CACHE = "../apps_cache/"
 DATA_DIR = "__DATA_DIR__/appstore_data"
