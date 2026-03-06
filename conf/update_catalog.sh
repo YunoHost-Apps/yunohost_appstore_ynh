@@ -25,7 +25,7 @@ update_venv() {
         python3 -m venv venv
     fi
     venv/bin/pip install --upgrade pip > /dev/null
-    venv/bin/pip install -r requirements.txt > /dev/null
+    venv/bin/pip install -e . > /dev/null
 }
 
 reload_store() {
@@ -40,7 +40,7 @@ update_git_and_venv() {
     {
         git_pull "[appstore/apps-tools] Couldn't pull, maybe local changes are present?"
         update_venv
-        venv/bin/pip install -r requirements.txt > /dev/null
+        venv/bin/pip install -e . > /dev/null
     }
     popd > /dev/null
 
@@ -54,10 +54,8 @@ update_git_and_venv() {
     {
         git_pull "[appstore] Couldn't pull, maybe local changes are present?"
         update_venv
-        venv/bin/pip install -r requirements.txt > /dev/null
-        pushd assets
-            bash ./fetch_assets
-        popd
+        venv/bin/pip install -e . > /dev/null
+        ./tools/fetch_assets
 
         if [[ "${git_was_updated}" == 1 ]]; then
             if ! reload_store; then
@@ -81,11 +79,11 @@ main() {
     apps_tools/venv/bin/python3 apps_tools/list_builder.py \
         -l "__DATA_DIR__/appstore_data/apps" \
         -c "__DATA_DIR__/appstore_data/apps_cache" \
-        catalog/default
+        "__INSTALL_DIR__/catalog/default"
 
     pushd "appstore"
         # curl https://__DOMAIN__/default/v3/apps.json -so .cache/apps.json
-        cp ../catalog/default/v3/apps.json .cache/apps.json
+        cp "__INSTALL_DIR__/catalog/default/v3/apps.json" "__DATA_DIR__/appstore_data/apps.json"
 
         venv/bin/python3 fetch_main_dashboard.py 2>&1 | grep -v 'Following Github server redirection'
         venv/bin/python3 fetch_level_history.py
