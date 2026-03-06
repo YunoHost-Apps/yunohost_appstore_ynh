@@ -15,7 +15,8 @@ ExecStopPost=__INSTALL_DIR__/notify_status.sh
 StandardOutput=append:/var/log/__APP__/update_apps_levels.log
 StandardError=inherit
 
-# Please systemctl edit and add this line:
+# Please systemctl edit and add these lines:
+# [Service]
 # Environment=UPTIME_KUMA_KEY=<the uptime kuma key>
 
 # Sandboxing options to harden security

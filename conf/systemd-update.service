@@ -15,7 +15,8 @@ ExecStopPost=__INSTALL_DIR__/update_catalog_notify_mail.sh
 StandardOutput=append:/var/log/__APP__/update_catalog.log
 StandardError=inherit
 
-# Please systemctl edit and add this line:
+# Please systemctl edit and add these lines:
+# [Service]
 # Environment=UPTIME_KUMA_KEY=<the uptime kuma key>
 
 # Sandboxing options to harden security
