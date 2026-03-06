@@ -87,8 +87,8 @@ main() {
         # curl https://__DOMAIN__/default/v3/apps.json -so .cache/apps.json
         cp "__INSTALL_DIR__/catalog/default/v3/apps.json" "__DATA_DIR__/appstore_data/apps.json"
 
-        venv/bin/python3 src/appstore/fetch_main_dashboard.py 2>&1 | grep -v 'Following Github server redirection'
-        venv/bin/python3 src/appstore/fetch_level_history.py
+        venv/bin/fetch_main_dashboard 2>&1 | grep -v 'Following Github server redirection'
+        venv/bin/fetch_level_history
     popd
 }
 
