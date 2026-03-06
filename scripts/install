@@ -55,11 +55,13 @@ ynh_script_progression "Adding system configurations related to $app..."
 
 ynh_config_add_nginx
 
-ynh_config_add --template="systemd-update.service" --destination="/etc/systemd/system/$app-update.service"
-ynh_config_add --template="systemd-update.timer" --destination="/etc/systemd/system/$app-update.timer"
-ynh_config_add_systemd
-systemctl enable "$app-update.timer" --now --quiet
+for timer in "update" "apps-autoupdate" "apps-update-levels"; do
+    ynh_config_add --template="systemd-$timer.service" --destination="/etc/systemd/system/$app-$timer.service"
+    ynh_config_add --template="systemd-$timer.timer" --destination="/etc/systemd/system/$app-$timer.timer"
+    systemctl enable "$app-$timer.timer" --now --quiet
+done
 
+ynh_config_add_systemd
 yunohost service add "$app" --log="/var/log/$app/$app.log"
 
 ynh_config_add_logrotate

@@ -22,8 +22,10 @@ ynh_backup "$install_dir"
 
 ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
 
-ynh_backup "/etc/systemd/system/$app-update.service"
-ynh_backup "/etc/systemd/system/$app-update.timer"
+for timer in "update" "apps-autoupdate" "apps-update-levels"; do
+    ynh_backup "/etc/systemd/system/$app-$timer.service"
+    ynh_backup "/etc/systemd/system/$app-$timer.timer"
+done
 ynh_backup "/etc/systemd/system/$app.service"
 
 ynh_backup "/etc/logrotate.d/$app"

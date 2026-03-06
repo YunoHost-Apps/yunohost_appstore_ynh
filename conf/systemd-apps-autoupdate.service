@@ -1,17 +1,17 @@
 [Unit]
-Description=YunoHost update for Appstore
+Description=YunoHost Apps sources Autoupdate
 After=network.target
 
 [Service]
 Type=simple
-User=__APP__
-Group=__APP__
+User=appstore
+Group=appstore
 
-WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/update_catalog.sh
-ExecStopPost=__INSTALL_DIR__/update_catalog_notify.sh
-
-StandardOutput=append:/var/log/__APP__/update_catalog.log
+WorkingDirectory=__INSTALL_DIR__/apps_tools/
+Environment=APPS_REPO_DIR=__DATA_DIR__/apps_tools_cache/apps
+Environment=APPS_CACHE_DIR=__DATA_DIR__/apps_tools_cache/apps_cache
+ExecStart=__INSTALL_DIR__/apps_tools/maintenance.sh autoupdate_app_sources
+StandardOutput=append:/var/log/__APP__/apps_sources_autoupdate.log
 StandardError=inherit
 
 # Please systemctl edit and add this line:
@@ -21,24 +21,23 @@ StandardError=inherit
 # Depending on specificities of your service/app, you may need to tweak these
 # .. but this should be a good baseline
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
-# TODO: Try to reenable all that stuff ? postdrop fails because of setgid…
-# NoNewPrivileges=yes
-# PrivateTmp=yes
-# PrivateDevices=yes
-# RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
-# RestrictNamespaces=yes
-# RestrictRealtime=yes
-# DevicePolicy=closed
-# ProtectClock=yes
-# ProtectHostname=yes
-# ProtectProc=invisible
-# ProtectSystem=full
-# ProtectControlGroups=yes
-# ProtectKernelModules=yes
-# ProtectKernelTunables=yes
-# LockPersonality=yes
-# SystemCallArchitectures=native
-# SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+RestrictNamespaces=yes
+RestrictRealtime=yes
+DevicePolicy=closed
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+ProtectSystem=full
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation
 # @privileged # (not sure why this need to be removed...)
 
 # Denying access to capabilities that should not be relevant for webapps
