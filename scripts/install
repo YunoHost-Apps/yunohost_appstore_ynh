@@ -18,8 +18,11 @@ _git_clone_or_pull "$install_dir/apps_tools" https://github.com/YunoHost/apps-to
 ynh_config_add --template="update_catalog.sh" --destination="$install_dir/update_catalog.sh"
 chmod +x "$install_dir/update_catalog.sh"
 
-ynh_config_add --template="update_catalog_notify.sh" --destination="$install_dir/update_catalog_notify.sh"
-chmod +x "$install_dir/update_catalog_notify.sh"
+ynh_config_add --template="notify_status.sh" --destination="$install_dir/notify_status.sh"
+chmod +x "$install_dir/notify_status.sh"
+
+ynh_config_add --template="update_catalog_notify_mail.sh" --destination="$install_dir/update_catalog_notify_mail.sh"
+chmod +x "$install_dir/update_catalog_notify_mail.sh"
 
 # That way, we keep the www-data group when creating files
 chmod g+s "$install_dir/appstore/assets"

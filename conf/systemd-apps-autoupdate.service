@@ -11,11 +11,12 @@ WorkingDirectory=__INSTALL_DIR__/apps_tools/
 Environment=APPS_REPO_DIR=__DATA_DIR__/apps_tools_cache/apps
 Environment=APPS_CACHE_DIR=__DATA_DIR__/apps_tools_cache/apps_cache
 ExecStart=__INSTALL_DIR__/apps_tools/maintenance.sh autoupdate_app_sources
+ExecStopPost=__INSTALL_DIR__/notify_status.sh
 StandardOutput=append:/var/log/__APP__/apps_sources_autoupdate.log
 StandardError=inherit
 
 # Please systemctl edit and add this line:
-# ExecStopPost=__INSTALL_DIR__/notify_status.sh THE_UPTIME_KUMA_KEY
+# Environment=UPTIME_KUMA_KEY=<the uptime kuma key>
 
 # Sandboxing options to harden security
 # Depending on specificities of your service/app, you may need to tweak these
