@@ -25,7 +25,11 @@ update_venv() {
         python3 -m venv venv
     fi
     venv/bin/pip install --upgrade pip > /dev/null
-    venv/bin/pip install -e . > /dev/null
+    if [ -f requirements.txt ]; then
+        venv/bin/pip install -r requirements.txt > /dev/null
+    else
+        venv/bin/pip install -e . > /dev/null
+    fi
 }
 
 reload_store() {
@@ -40,7 +44,6 @@ update_git_and_venv() {
     {
         git_pull "[appstore/apps-tools] Couldn't pull, maybe local changes are present?"
         update_venv
-        venv/bin/pip install -e . > /dev/null
     }
     popd > /dev/null
 
@@ -54,7 +57,6 @@ update_git_and_venv() {
     {
         git_pull "[appstore] Couldn't pull, maybe local changes are present?"
         update_venv
-        venv/bin/pip install -e . > /dev/null
         ./tools/fetch_assets
 
         if [[ "${git_was_updated}" == 1 ]]; then
@@ -85,8 +87,8 @@ main() {
         # curl https://__DOMAIN__/default/v3/apps.json -so .cache/apps.json
         cp "__INSTALL_DIR__/catalog/default/v3/apps.json" "__DATA_DIR__/appstore_data/apps.json"
 
-        venv/bin/python3 fetch_main_dashboard.py 2>&1 | grep -v 'Following Github server redirection'
-        venv/bin/python3 fetch_level_history.py
+        venv/bin/python3 src/appstore/fetch_main_dashboard.py 2>&1 | grep -v 'Following Github server redirection'
+        venv/bin/python3 src/appstore/fetch_level_history.py
     popd
 }
 
