@@ -13,7 +13,7 @@ version = "1.2~ynh0"
 maintainers = []
 
 [upstream]
-license = "GPLv3"
+license = "GPL-3.0"
 website = "https://apps.yunohost.org"
 demo = "https://apps.yunohost.org"
 
